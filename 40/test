@@ -1,0 +1,40 @@
+import numpy as np
+
+# Define the matrix A and vector b based on the given problem
+A = np.array([
+    [4, -1, 0, 0, 1, 0],
+    [-1, 4, -1, 0, -1, 0],
+    [0, -1, 4, 0, 0, -1],
+    [0, 0, 0, 4, -1, 0],
+    [1, -1, 0, -1, 4, -1],
+    [0, 0, -1, 0, -1, 4]
+])
+
+b = np.array([0, 5, 0, 6, -2, 6])
+
+# Define the gradient descent parameters
+learning_rate = 0.01
+tolerance = 1e-6
+max_iterations = 10000
+
+# Initialize y (starting point)
+y = np.zeros(6)
+
+# Gradient Descent Algorithm
+for _ in range(max_iterations):
+    # Compute the gradient: grad_f(y) = 2Ay - 2b
+    gradient = 2 * A @ y - 2 * b
+    
+    # Check the stopping criterion (norm of the gradient)
+    if np.linalg.norm(gradient) < tolerance:
+        break
+    
+    # Update y
+    y = y - learning_rate * gradient
+
+# Calculate the Euclidean norm of the solution vector y*
+norm_y_star = np.linalg.norm(y)
+
+# Display the result rounded to 4 decimal places
+norm_y_star_rounded = round(norm_y_star, 4)
+norm_y_star_rounded
